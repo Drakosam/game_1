@@ -23,9 +23,9 @@ func set_level_with_size(level_size):
 			draw_hex_line(ii, (-hex_d+16)*(i+1), -hex_d/2*ii+hex_d/2, 'LL'+str(i)+"_")
 
 
-func _picked_hex_proc(hex_name):
+func _picked_hex_proc(hex_name, pick_position):
 	for hex in get_children():
-		hex.hex_has_ben_picked(hex_name)
+		hex.hex_has_ben_picked(hex_name, pick_position)
 	
 	
 
