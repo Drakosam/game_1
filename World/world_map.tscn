@@ -6,4 +6,22 @@
 [node name="WorldMap" type="Node2D"]
 script = ExtResource("1_lrg7e")
 
+[node name="CloudLevel" parent="." instance=ExtResource("2_r0rki")]
+visible = false
+
+[node name="TopLevel" parent="." instance=ExtResource("2_r0rki")]
+visible = false
+
+[node name="CommerceLevel" parent="." instance=ExtResource("2_r0rki")]
+visible = false
+
 [node name="BaseLevel" parent="." instance=ExtResource("2_r0rki")]
+
+[node name="UndergroundLevel" parent="." instance=ExtResource("2_r0rki")]
+visible = false
+
+[node name="DeapUndergroundLvel" parent="." instance=ExtResource("2_r0rki")]
+visible = false
+
+[node name="UnderCitysLevel" parent="." instance=ExtResource("2_r0rki")]
+visible = false

@@ -5,11 +5,12 @@ var picked = false
 var picked_neighborhood = false
 var my_name = ''
 
+var rng = RandomNumberGenerator.new()
+
 signal picked_hex(hex_name, pick_position)
 
 func _ready():
-	my_name = str(get_parent().get_instance_id())+str(get_instance_id())
-	
+	pass
 	
 func _on_area_2d_mouse_entered():
 	focus = true
@@ -54,4 +55,6 @@ func _process(delta):
 
 func set_my_name(my_new_name):
 	my_name = my_new_name
+	if rng.randi_range(1,20)< 5 and ('UnderCity' in my_name):
+		visible = false
 		
