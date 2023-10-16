@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://evaeyx7qw3t3"]
+
+[ext_resource type="Script" path="res://World/world_level.gd" id="1_e8rim"]
+
+[node name="WorldLevel" type="Node2D"]
+script = ExtResource("1_e8rim")

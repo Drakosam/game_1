@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://bs5gxwsh0kkjn"]
+
+[node name="GameCore" type="Node2D"]

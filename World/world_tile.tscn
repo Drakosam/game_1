@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqoew2ua2jec8"]
+
+[ext_resource type="Script" path="res://World/world_tile.gd" id="1_7n57k"]
+
+[node name="WorldTile" type="Node2D"]
+script = ExtResource("1_7n57k")
+
+[node name="TileBackground" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(40, 64, 72, 0, 40, -64, -40, -64, -72, 0, -40, 64)
+
+[node name="TileFront" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(39, -62, 70, 0, 39, 62, -39, 62, -70, 0, -39, -62)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(0, 3)
+polygon = PackedVector2Array(72, -3, 40, -67, -40, -67, -72, -3, -40, 61, 40, 61)
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

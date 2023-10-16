@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8ewnoxo6fl2b"]
+
+[ext_resource type="Script" path="res://main_game_loop.gd" id="1_2jap4"]
+[ext_resource type="PackedScene" uid="uid://f1a2s13oeo64" path="res://Interface/top_panel.tscn" id="1_qrgga"]
+[ext_resource type="PackedScene" uid="uid://d1qfn71lciogl" path="res://World/world_map.tscn" id="2_r1j80"]
+[ext_resource type="PackedScene" uid="uid://8p2dls85kh8" path="res://Interface/camera_2d.tscn" id="4_waeu0"]
+
+[node name="MainGameLoop" type="Node2D"]
+script = ExtResource("1_2jap4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TopPanel" parent="CanvasLayer" instance=ExtResource("1_qrgga")]
+
+[node name="WorldMap" parent="." instance=ExtResource("2_r1j80")]
+
+[node name="Camera2D" parent="." instance=ExtResource("4_waeu0")]
