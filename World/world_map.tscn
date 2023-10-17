@@ -25,3 +25,11 @@ visible = false
 
 [node name="UnderCitysLevel" parent="." instance=ExtResource("2_r0rki")]
 visible = false
+
+[connection signal="registerTile" from="CloudLevel" to="." method="_registerTile"]
+[connection signal="registerTile" from="TopLevel" to="." method="_registerTile"]
+[connection signal="registerTile" from="CommerceLevel" to="." method="_registerTile"]
+[connection signal="registerTile" from="BaseLevel" to="." method="_registerTile"]
+[connection signal="registerTile" from="UndergroundLevel" to="." method="_registerTile"]
+[connection signal="registerTile" from="DeapUndergroundLvel" to="." method="_registerTile"]
+[connection signal="registerTile" from="UnderCitysLevel" to="." method="_registerTile"]

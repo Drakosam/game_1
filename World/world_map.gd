@@ -1,6 +1,9 @@
 extends Node2D
 
 var show_lvl = 4
+var list_level = []
+
+signal registerTile(tile)
 
 func _ready():
 	$CloudLevel.set_level_with_size(3)
@@ -10,7 +13,14 @@ func _ready():
 	$UndergroundLevel.set_level_with_size(5)
 	$DeapUndergroundLvel.set_level_with_size(4)
 	$UnderCitysLevel.set_level_with_size(4)
+	
+	list_level = [$CloudLevel,$TopLevel,$CommerceLevel,$BaseLevel,
+	$UndergroundLevel,$DeapUndergroundLvel,$UnderCitysLevel]	
 
+
+func view_is_bloced(status):
+	for item in list_level:
+		item.view_is_bloced(status)
 
 func _input(event):
 	if (event is InputEventKey) and Input.is_key_pressed(KEY_KP_ADD) :
@@ -27,9 +37,6 @@ func update_view():
 	elif show_lvl > 7 :
 		show_lvl = 7
 	
-	var list_level = [$CloudLevel,$TopLevel,$CommerceLevel,$BaseLevel,
-	$UndergroundLevel,$DeapUndergroundLvel,$UnderCitysLevel]	
-	
 	for i in range(1,8):
 		if i == show_lvl:
 			list_level[i-1].visible = true
@@ -37,6 +44,7 @@ func update_view():
 		else:
 			list_level[i-1].visible = false
 			
-		
-	
+
+func _registerTile(tile):
+	emit_signal('registerTile',tile)
 	

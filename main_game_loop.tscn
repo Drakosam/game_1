@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8ewnoxo6fl2b"]
+[gd_scene load_steps=8 format=3 uid="uid://b8ewnoxo6fl2b"]
 
 [ext_resource type="Script" path="res://main_game_loop.gd" id="1_2jap4"]
 [ext_resource type="PackedScene" uid="uid://f1a2s13oeo64" path="res://Interface/top_panel.tscn" id="1_qrgga"]
 [ext_resource type="PackedScene" uid="uid://d1qfn71lciogl" path="res://World/world_map.tscn" id="2_r1j80"]
+[ext_resource type="PackedScene" uid="uid://67gvgut6iuqe" path="res://Interface/agent_panel.tscn" id="3_ukb6n"]
 [ext_resource type="PackedScene" uid="uid://8p2dls85kh8" path="res://Interface/camera_2d.tscn" id="4_waeu0"]
+[ext_resource type="PackedScene" uid="uid://b5nsgnnmye12k" path="res://Backend/tile_backend.tscn" id="5_m6o2q"]
+[ext_resource type="PackedScene" uid="uid://bkvqc87m2xabn" path="res://Backend/agent_backend.tscn" id="6_hhaky"]
 
 [node name="MainGameLoop" type="Node2D"]
 script = ExtResource("1_2jap4")
@@ -12,6 +15,18 @@ script = ExtResource("1_2jap4")
 
 [node name="TopPanel" parent="CanvasLayer" instance=ExtResource("1_qrgga")]
 
+[node name="AgentPanel" parent="CanvasLayer" instance=ExtResource("3_ukb6n")]
+offset_top = 50.0
+
 [node name="WorldMap" parent="." instance=ExtResource("2_r1j80")]
 
 [node name="Camera2D" parent="." instance=ExtResource("4_waeu0")]
+
+[node name="TileBackend" parent="." instance=ExtResource("5_m6o2q")]
+
+[node name="AgentBackend" parent="." instance=ExtResource("6_hhaky")]
+
+[connection signal="view_is_blocked" from="CanvasLayer/TopPanel" to="." method="_on_view_is_blocked"]
+[connection signal="view_is_blocked" from="CanvasLayer/AgentPanel" to="." method="_on_view_is_blocked"]
+[connection signal="registerTile" from="WorldMap" to="." method="_on_world_map_register_tile"]
+[connection signal="update_agent_locations" from="AgentBackend" to="." method="_on_agent_backend_update_agent_locations"]

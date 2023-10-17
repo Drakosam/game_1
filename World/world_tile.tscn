@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqoew2ua2jec8"]
+[gd_scene load_steps=3 format=3 uid="uid://cqoew2ua2jec8"]
 
 [ext_resource type="Script" path="res://World/world_tile.gd" id="1_7n57k"]
+[ext_resource type="PackedScene" uid="uid://34hcuj10jbti" path="res://Interface/icons/agent_icone.tscn" id="2_vkqww"]
 
 [node name="WorldTile" type="Node2D"]
 script = ExtResource("1_7n57k")
@@ -17,6 +18,9 @@ polygon = PackedVector2Array(39, -62, 70, 0, 39, 62, -39, 62, -70, 0, -39, -62)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 position = Vector2(0, 3)
 polygon = PackedVector2Array(72, -3, 40, -67, -40, -67, -72, -3, -40, 61, 40, 61)
+
+[node name="AgentIcone" parent="." instance=ExtResource("2_vkqww")]
+position = Vector2(0, -1)
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

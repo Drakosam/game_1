@@ -1,7 +1,25 @@
-[gd_scene format=3 uid="uid://f1a2s13oeo64"]
+[gd_scene load_steps=3 format=3 uid="uid://f1a2s13oeo64"]
+
+[ext_resource type="Script" path="res://Interface/top_panel.gd" id="1_35njj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_03mbx"]
+bg_color = Color(0, 0, 0, 1)
 
 [node name="TopPanel" type="Panel"]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 50.0
 grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_03mbx")
+script = ExtResource("1_35njj")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="mouse_entered" from="HBoxContainer" to="." method="_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer" to="." method="_mouse_exited"]

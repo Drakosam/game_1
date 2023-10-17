@@ -3,7 +3,9 @@ extends Node2D
 var focus = false
 var picked = false
 var picked_neighborhood = false
-var my_name = ''
+var view_is_blocked = false
+
+var agent_in_region = false
 
 var rng = RandomNumberGenerator.new()
 
@@ -11,6 +13,7 @@ signal picked_hex(hex_name, pick_position)
 
 func _ready():
 	pass
+	
 	
 func _on_area_2d_mouse_entered():
 	focus = true
@@ -21,13 +24,14 @@ func _on_area_2d_mouse_exited():
 
 
 func _input(event):
-	if focus:
+	if focus and not view_is_blocked:
 		if (event is InputEventMouseButton) and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) :
-			emit_signal("picked_hex", my_name, position)
+			emit_signal("picked_hex", name, position)
+			print('region picked :: ', name)
 
 
 func hex_has_ben_picked(hex_name, pick_position):
-	if hex_name == my_name:
+	if hex_name == name:
 		picked = true
 	else :
 		picked = false
@@ -38,12 +42,13 @@ func hex_has_ben_picked(hex_name, pick_position):
 		picked_neighborhood = false
 	
 
-func _process(delta):
-	if picked and focus:
+func _process(_delta):
+	
+	if picked and focus and not view_is_blocked:
 		$TileFront.color = Color('#8888ff')
-	elif picked_neighborhood and focus:
+	elif picked_neighborhood and focus and not view_is_blocked:
 		$TileFront.color = Color('#ff8888')
-	elif focus:
+	elif focus and not view_is_blocked:
 		$TileFront.color = Color('#ddddff')
 	elif picked :
 		$TileFront.color = Color('#888888')
@@ -51,10 +56,18 @@ func _process(delta):
 		$TileFront.color = Color('#ffdddd')
 	else:
 		$TileFront.color = Color('#ffffff')
-
+	
+	if agent_in_region :
+		$AgentIcone.visible = true
+	else:
+		$AgentIcone.visible = false
+	
+func view_is_bloced(status):
+	view_is_blocked = status
 
 func set_my_name(my_new_name):
-	my_name = my_new_name
-	if rng.randi_range(1,20)< 5 and ('UnderCity' in my_name):
+	name = my_new_name
+	if rng.randi_range(1, 20)< 5 and ('UnderCity' in name):
 		visible = false
-		
+
+

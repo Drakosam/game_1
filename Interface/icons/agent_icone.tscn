@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://34hcuj10jbti"]
+
+[node name="AgentIcone" type="Node2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0, 0.356863, 1, 1)
+polygon = PackedVector2Array(-10, 0, -5, 11, 0, 5, 5, 11, 10, 0, 0, -10)
