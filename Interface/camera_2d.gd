@@ -8,8 +8,12 @@ func _ready():
 
 
 func _input(event):
-	if (event is InputEventMouseButton) and Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE) :
+	if (event is InputEventMouseButton) and Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE):
 		start_posytion = get_global_mouse_position()
-		can_move = not can_move
+		can_move = true
+	
+	if can_move and not Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE) :
+		can_move = false
+	
 	if event is InputEventMouseMotion and can_move:
 		self.position += start_posytion - get_global_mouse_position()

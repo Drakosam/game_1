@@ -14,3 +14,12 @@ config/name="game_1"
 run/main_scene="res://main_game_loop.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1200
+window/size/viewport_height=800
+
+[rendering]
+
+anti_aliasing/quality/use_taa=true

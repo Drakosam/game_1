@@ -28,5 +28,7 @@ offset_top = 50.0
 
 [connection signal="view_is_blocked" from="CanvasLayer/TopPanel" to="." method="_on_view_is_blocked"]
 [connection signal="view_is_blocked" from="CanvasLayer/AgentPanel" to="." method="_on_view_is_blocked"]
+[connection signal="region_picked" from="WorldMap" to="." method="_on_world_map_region_picked"]
 [connection signal="registerTile" from="WorldMap" to="." method="_on_world_map_register_tile"]
 [connection signal="update_agent_locations" from="AgentBackend" to="." method="_on_agent_backend_update_agent_locations"]
+[connection signal="update_agents_in_region" from="AgentBackend" to="." method="_on_agent_backend_update_agents_in_region"]

@@ -4,6 +4,8 @@ var show_lvl = 4
 var list_level = []
 
 signal registerTile(tile)
+signal region_picked(region_name)
+
 
 func _ready():
 	$CloudLevel.set_level_with_size(3)
@@ -21,6 +23,7 @@ func _ready():
 func view_is_bloced(status):
 	for item in list_level:
 		item.view_is_bloced(status)
+
 
 func _input(event):
 	if (event is InputEventKey) and Input.is_key_pressed(KEY_KP_ADD) :
@@ -43,8 +46,11 @@ func update_view():
 			print(list_level[i-1].name)
 		else:
 			list_level[i-1].visible = false
-			
+
 
 func _registerTile(tile):
 	emit_signal('registerTile',tile)
-	
+
+
+func _region_picked(hex_name):
+	emit_signal("region_picked",hex_name)

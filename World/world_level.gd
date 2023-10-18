@@ -3,6 +3,7 @@ extends Node2D
 var Tile = preload("res://World/world_tile.tscn")
 
 signal registerTile(tile)
+signal region_picked(region_name)
 
 func _ready():
 	pass
@@ -33,6 +34,8 @@ func set_level_with_size(level_size):
 func _picked_hex_proc(hex_name, pick_position):
 	for hex in get_children():
 		hex.hex_has_ben_picked(hex_name, pick_position)
+	
+	emit_signal('region_picked',hex_name)
 	
 
 func draw_hex_line(line_size, start_x, start_y,tile_name=''):

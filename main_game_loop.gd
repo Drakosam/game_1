@@ -30,3 +30,11 @@ func _on_agent_backend_update_agent_locations(agent_locations):
 
 func _on_view_is_blocked(status):
 	$WorldMap.view_is_bloced(status)
+
+
+func _on_world_map_region_picked(region_name):
+	$AgentBackend.pick_agent_list_for_region(region_name)
+
+
+func _on_agent_backend_update_agents_in_region(agents_list):
+	$CanvasLayer/AgentPanel.set_agents(agents_list)
