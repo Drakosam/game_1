@@ -29,6 +29,8 @@ func set_level_with_size(level_size):
 				break				 
 			draw_hex_line(ii, (hex_d-16)*(i+1), int(-float(hex_d)/2*ii+float(hex_d)/2), str(name)+'_LR'+str(i)+"_")
 			draw_hex_line(ii, (-hex_d+16)*(i+1), int(-float(hex_d)/2*ii+float(hex_d)/2), str(name)+'_LL'+str(i)+"_")
+	
+	set_neighborhood_for_children()
 
 
 func _picked_hex_proc(hex_name, pick_position):
@@ -51,5 +53,14 @@ func put_tile_in_level(pos_x, pos_y, tile_name=''):
 	add_child(new_tile)
 	new_tile.connect('picked_hex',_picked_hex_proc)
 	new_tile.set_my_name(tile_name)
+	new_tile.set_world_posytion_from_center()
 	
 	emit_signal('registerTile', new_tile)
+
+
+func set_neighborhood_for_children():
+	for child in get_children():
+		for child_ in get_children():
+			var dist = round(child.position.distance_to(child_.position)/127+.15) 
+			if dist == 1:
+				child.add_to_my_neighborhood(child_)

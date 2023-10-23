@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://b8ewnoxo6fl2b"]
+[gd_scene load_steps=9 format=3 uid="uid://b8ewnoxo6fl2b"]
 
 [ext_resource type="Script" path="res://main_game_loop.gd" id="1_2jap4"]
 [ext_resource type="PackedScene" uid="uid://f1a2s13oeo64" path="res://Interface/top_panel.tscn" id="1_qrgga"]
 [ext_resource type="PackedScene" uid="uid://d1qfn71lciogl" path="res://World/world_map.tscn" id="2_r1j80"]
 [ext_resource type="PackedScene" uid="uid://67gvgut6iuqe" path="res://Interface/agent_panel.tscn" id="3_ukb6n"]
+[ext_resource type="PackedScene" uid="uid://dgd8f6n7emumg" path="res://Interface/agent_detail.tscn" id="4_b6mc0"]
 [ext_resource type="PackedScene" uid="uid://8p2dls85kh8" path="res://Interface/camera_2d.tscn" id="4_waeu0"]
 [ext_resource type="PackedScene" uid="uid://b5nsgnnmye12k" path="res://Backend/tile_backend.tscn" id="5_m6o2q"]
 [ext_resource type="PackedScene" uid="uid://bkvqc87m2xabn" path="res://Backend/agent_backend.tscn" id="6_hhaky"]
@@ -18,6 +19,13 @@ script = ExtResource("1_2jap4")
 [node name="AgentPanel" parent="CanvasLayer" instance=ExtResource("3_ukb6n")]
 offset_top = 50.0
 
+[node name="AgentDetail" parent="CanvasLayer" instance=ExtResource("4_b6mc0")]
+visible = false
+offset_left = 150.0
+offset_top = 150.0
+offset_right = -150.0
+offset_bottom = -150.0
+
 [node name="WorldMap" parent="." instance=ExtResource("2_r1j80")]
 
 [node name="Camera2D" parent="." instance=ExtResource("4_waeu0")]
@@ -27,8 +35,12 @@ offset_top = 50.0
 [node name="AgentBackend" parent="." instance=ExtResource("6_hhaky")]
 
 [connection signal="view_is_blocked" from="CanvasLayer/TopPanel" to="." method="_on_view_is_blocked"]
+[connection signal="show_agent" from="CanvasLayer/AgentPanel" to="." method="_on_agent_panel_show_agent"]
 [connection signal="view_is_blocked" from="CanvasLayer/AgentPanel" to="." method="_on_view_is_blocked"]
+[connection signal="close_agent_detail" from="CanvasLayer/AgentDetail" to="." method="_on_agent_detail_close_agent_detail"]
+[connection signal="move_pick_proc" from="CanvasLayer/AgentDetail" to="." method="_on_agent_detail_move_pick_proc"]
 [connection signal="region_picked" from="WorldMap" to="." method="_on_world_map_region_picked"]
 [connection signal="registerTile" from="WorldMap" to="." method="_on_world_map_register_tile"]
+[connection signal="selected_region_whos_picked" from="TileBackend" to="." method="_on_tile_backend_selected_region_whos_picked"]
 [connection signal="update_agent_locations" from="AgentBackend" to="." method="_on_agent_backend_update_agent_locations"]
 [connection signal="update_agents_in_region" from="AgentBackend" to="." method="_on_agent_backend_update_agents_in_region"]

@@ -3,6 +3,7 @@ extends Panel
 var AgentPreviewClass = preload('res://Interface/component/agent_preview.tscn')
 
 signal view_is_blocked(status)
+signal show_agent(agent_item)
 
 func _ready():
 	pass
@@ -19,6 +20,7 @@ func _mouse_exited():
 func _add_preview(_agent):
 	var agent_preview = AgentPreviewClass.instantiate()
 	agent_preview.connect('update_block_vision',_update_block_view_signal)
+	agent_preview.connect('show_agent',_show_detail_for_agent)
 	agent_preview.set_agent(_agent)
 	
 	$ScrollContainer/GridContainer.add_child(agent_preview)
@@ -26,6 +28,7 @@ func _add_preview(_agent):
 
 func _remove_preview(child):
 	child.disconnect('update_block_vision',_update_block_view_signal)
+	child.disconnect('show_agent',_show_detail_for_agent)
 	$ScrollContainer/GridContainer.remove_child(child)
 	child.queue_free()
 
@@ -36,6 +39,10 @@ func _update_block_view_signal():
 		block = block or child.block_vision
 	
 	emit_signal('view_is_blocked',block)
+
+
+func _show_detail_for_agent(agent_item):
+	emit_signal('show_agent',agent_item)
 
 
 func set_agents(agents_list):
