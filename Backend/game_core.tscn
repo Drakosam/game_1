@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://Backend/game_core.gd" id="1_xikib"]
 
-[node name="GameCore" type="Node2D"]
+[node name="GameCore" type="Node"]
 script = ExtResource("1_xikib")

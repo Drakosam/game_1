@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://Backend/tile_backend.gd" id="1_qaa8m"]
 
-[node name="TileBackend" type="Node2D"]
+[node name="TileBackend" type="Node"]
 script = ExtResource("1_qaa8m")

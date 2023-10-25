@@ -63,3 +63,13 @@ func _on_tile_backend_selected_region_whos_picked(hex_name):
 	$CanvasLayer/AgentDetail.visible = true
 	$CanvasLayer/AgentPanel.visible = false
 	$CanvasLayer/AgentDetail.move_agent_to_region(hex_name)
+
+
+func _on_timer_timeout():
+	$AgentBackend.act()
+
+
+func _on_agent_backend_chec_path_to_tile(start_tile, target_tile, agent_name):
+	print('reqest for path from ',start_tile,' to ',target_tile)
+	var item = $TileBackend.get_path_to_tile(start_tile, target_tile, agent_name)
+	$AgentBackend.set_tile_path(item['target_name'],item['path'])

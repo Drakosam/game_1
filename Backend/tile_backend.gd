@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 var tile_list = []
 
@@ -31,6 +31,14 @@ func start_move_proces():
 func end_move_proces():
 	for tile in tile_list:
 		tile.move_process = false
+		
+
+func get_path_to_tile(start_tile, target_tile, agent_name):
+	var path = [target_tile, start_tile]
+	return {
+		'target_name':agent_name,
+		'path':path
+	}
 		
 
 func _region_selected(hex_name):

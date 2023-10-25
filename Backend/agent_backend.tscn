@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://Backend/agent_backend.gd" id="1_khong"]
 
-[node name="AgentBackend" type="Node2D"]
+[node name="AgentBackend" type="Node"]
 script = ExtResource("1_khong")

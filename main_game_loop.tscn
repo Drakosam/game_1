@@ -34,6 +34,10 @@ offset_bottom = -150.0
 
 [node name="AgentBackend" parent="." instance=ExtResource("6_hhaky")]
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
 [connection signal="view_is_blocked" from="CanvasLayer/TopPanel" to="." method="_on_view_is_blocked"]
 [connection signal="show_agent" from="CanvasLayer/AgentPanel" to="." method="_on_agent_panel_show_agent"]
 [connection signal="view_is_blocked" from="CanvasLayer/AgentPanel" to="." method="_on_view_is_blocked"]
@@ -42,5 +46,7 @@ offset_bottom = -150.0
 [connection signal="region_picked" from="WorldMap" to="." method="_on_world_map_region_picked"]
 [connection signal="registerTile" from="WorldMap" to="." method="_on_world_map_register_tile"]
 [connection signal="selected_region_whos_picked" from="TileBackend" to="." method="_on_tile_backend_selected_region_whos_picked"]
+[connection signal="chec_path_to_tile" from="AgentBackend" to="." method="_on_agent_backend_chec_path_to_tile"]
 [connection signal="update_agent_locations" from="AgentBackend" to="." method="_on_agent_backend_update_agent_locations"]
 [connection signal="update_agents_in_region" from="AgentBackend" to="." method="_on_agent_backend_update_agents_in_region"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
