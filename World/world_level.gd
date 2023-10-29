@@ -54,6 +54,7 @@ func put_tile_in_level(pos_x, pos_y, tile_name=''):
 	new_tile.connect('picked_hex',_picked_hex_proc)
 	new_tile.set_my_name(tile_name)
 	new_tile.set_world_posytion_from_center()
+	new_tile.region_level = name
 	
 	emit_signal('registerTile', new_tile)
 

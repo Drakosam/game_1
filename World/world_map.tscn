@@ -17,7 +17,7 @@ visible = false
 
 [node name="BaseLevel" parent="." instance=ExtResource("2_r0rki")]
 
-[node name="UndergroundLevel" parent="." instance=ExtResource("2_r0rki")]
+[node name="UpUndergroundLevel" parent="." instance=ExtResource("2_r0rki")]
 visible = false
 
 [node name="DeapUndergroundLvel" parent="." instance=ExtResource("2_r0rki")]
@@ -34,8 +34,8 @@ visible = false
 [connection signal="registerTile" from="CommerceLevel" to="." method="_registerTile"]
 [connection signal="region_picked" from="BaseLevel" to="." method="_region_picked"]
 [connection signal="registerTile" from="BaseLevel" to="." method="_registerTile"]
-[connection signal="region_picked" from="UndergroundLevel" to="." method="_region_picked"]
-[connection signal="registerTile" from="UndergroundLevel" to="." method="_registerTile"]
+[connection signal="region_picked" from="UpUndergroundLevel" to="." method="_region_picked"]
+[connection signal="registerTile" from="UpUndergroundLevel" to="." method="_registerTile"]
 [connection signal="region_picked" from="DeapUndergroundLvel" to="." method="_region_picked"]
 [connection signal="registerTile" from="DeapUndergroundLvel" to="." method="_registerTile"]
 [connection signal="region_picked" from="UnderCitysLevel" to="." method="_region_picked"]

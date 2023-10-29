@@ -56,5 +56,3 @@ func act(stats= null):
 
 		if job_progress>job_goal:
 			job_done()
-		
-		

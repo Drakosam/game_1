@@ -10,6 +10,7 @@ var agent_in_region = false
 var world_posytion_center = 0
 
 var my_neighborhood = []
+var region_level = ''
 
 var rng = RandomNumberGenerator.new()
 
@@ -52,7 +53,11 @@ func hex_has_ben_picked(hex_name, pick_position):
 
 
 func set_world_posytion_from_center():
-	world_posytion_center =  round(position.distance_to(Vector2(0,0))/127+.15) 
+	world_posytion_center =  round(get_distance_from_me(Vector2(0,0)) ) 
+
+
+func get_distance_from_me(vec_pos):
+	return position.distance_to(vec_pos)/127+.15
 
 
 func _process(_delta):

@@ -12,12 +12,12 @@ func _ready():
 	$TopLevel.set_level_with_size(4)
 	$CommerceLevel.set_level_with_size(5)
 	$BaseLevel.set_level_with_size(6)
-	$UndergroundLevel.set_level_with_size(5)
+	$UpUndergroundLevel.set_level_with_size(5)
 	$DeapUndergroundLvel.set_level_with_size(4)
 	$UnderCitysLevel.set_level_with_size(4)
 	
 	list_level = [$CloudLevel,$TopLevel,$CommerceLevel,$BaseLevel,
-	$UndergroundLevel,$DeapUndergroundLvel,$UnderCitysLevel]	
+	$UpUndergroundLevel,$DeapUndergroundLvel,$UnderCitysLevel]	
 
 
 func view_is_bloced(status):
