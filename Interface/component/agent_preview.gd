@@ -14,6 +14,7 @@ func _ready():
 func _process(delta):
 	if aggent_preview:
 		$VBoxContainer/AgentName.text = str(aggent_preview.name)
+		
 		if job_backend.current_job != "IDLE":
 			$VBoxContainer/ProgressBar.max_value = job_backend.job_goal
 			$VBoxContainer/ProgressBar.value = job_backend.job_progress
@@ -43,4 +44,5 @@ func _input(event):
 	if block_vision :
 		if (event is InputEventMouseButton) and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) :
 			emit_signal("show_agent", aggent_preview)
+			block_vision = false
 	

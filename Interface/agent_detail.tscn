@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dgd8f6n7emumg"]
+[gd_scene load_steps=5 format=3 uid="uid://dgd8f6n7emumg"]
 
 [ext_resource type="Script" path="res://Interface/agent_detail.gd" id="1_nt1d1"]
 
@@ -7,6 +7,9 @@ bg_color = Color(0.0846899, 0.0846899, 0.0846899, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aa1qu"]
 bg_color = Color(0.670588, 0.670588, 0.670588, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_epmet"]
+bg_color = Color(0.690196, 0.690196, 0.690196, 1)
 
 [node name="AgentDetail" type="Panel"]
 anchors_preset = 15
@@ -41,9 +44,39 @@ anchor_bottom = 1.0
 offset_right = 200.0
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="ButtonMove" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_epmet")
 text = "MOVE"
 
+[node name="ButtonExplore" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_epmet")
+text = "Explore"
+
+[node name="ButtonRecruting" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_epmet")
+text = "RECRUITING"
+
+[node name="Example" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_epmet")
+text = "example"
+
+[node name="CancelWork" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_epmet")
+text = "Cancel Work"
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/Button" to="." method="_move_agent"]
+[connection signal="pressed" from="VBoxContainer/ButtonMove" to="." method="_move_agent"]
+[connection signal="pressed" from="VBoxContainer/ButtonExplore" to="." method="_on_button_explore_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonRecruting" to="." method="_on_button_recruting_pressed"]
+[connection signal="pressed" from="VBoxContainer/CancelWork" to="." method="_on_cancel_work_pressed"]

@@ -24,4 +24,15 @@ func _move_agent():
 func move_agent_to_region(region_name):
 	if region_name:
 		show_agent.move_to_region(region_name)
-	
+
+
+func _on_button_explore_pressed():
+	show_agent.explore_tile()
+
+
+func _on_cancel_work_pressed():
+	show_agent.go_idle()
+
+
+func _on_button_recruting_pressed():
+	show_agent.recruit()

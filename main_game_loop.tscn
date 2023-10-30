@@ -47,6 +47,7 @@ autostart = true
 [connection signal="registerTile" from="WorldMap" to="." method="_on_world_map_register_tile"]
 [connection signal="selected_region_whos_picked" from="TileBackend" to="." method="_on_tile_backend_selected_region_whos_picked"]
 [connection signal="chec_path_to_tile" from="AgentBackend" to="." method="_on_agent_backend_chec_path_to_tile"]
+[connection signal="job_done_result" from="AgentBackend" to="." method="_on_agent_backend_job_done_result"]
 [connection signal="update_agent_locations" from="AgentBackend" to="." method="_on_agent_backend_update_agent_locations"]
 [connection signal="update_agents_in_region" from="AgentBackend" to="." method="_on_agent_backend_update_agents_in_region"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

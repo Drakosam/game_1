@@ -73,3 +73,7 @@ func _on_agent_backend_chec_path_to_tile(start_tile, target_tile, agent_name):
 	print('reqest for path from ',start_tile,' to ',target_tile)
 	var item = $TileBackend.get_path_to_tile(start_tile, target_tile, agent_name)
 	$AgentBackend.set_tile_path(item['target_name'],item['path'])
+
+
+func _on_agent_backend_job_done_result(job_result):
+	$TileBackend.resolve_job_result(job_result)

@@ -7,6 +7,7 @@ var show_region_name = ''
 signal update_agent_locations(agent_locations)
 signal update_agents_in_region(agents_list)
 signal chec_path_to_tile(start_tile, target_tile, agent_name)
+signal job_done_result( job_result )
 
 
 func _ready():
@@ -20,6 +21,7 @@ func add_agent(agent_seed=null):
 	
 	new_agent.connect('move_to_new_region',new_location_for_agent)
 	new_agent.connect('check_path_to_target_posytion',_chec_path_to_tile)
+	new_agent.connect('job_done_result',_job_done_result)
 	
 	add_child(new_agent)
 	
@@ -28,8 +30,10 @@ func add_agent(agent_seed=null):
 	
 	if 'name' in agent_seed:
 		new_agent.name = agent_seed['name']
+	else:
+		new_agent.name = 'Agent_'+str(new_agent.get_instance_id())
 	
-	update_agent_posytion()
+	new_location_for_agent()
 
 
 func new_location_for_agent():
@@ -73,3 +77,17 @@ func set_tile_path(agent_name, path):
 func act():
 	for child in get_children():
 		child.act()
+
+
+func _job_done_result(job_result):
+	print(job_result)
+	if job_result['job_type'] == 'RECRUITING':
+		for result in job_result['results']:
+			if 'status' in result and result['status']=='SUCCESS':
+				print('add new agent')
+				add_agent({'location':job_result['tile']})
+	else:
+		emit_signal('job_done_result',job_result)
+
+
+

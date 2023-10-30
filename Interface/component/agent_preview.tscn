@@ -5,7 +5,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8cc3e"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[node name="s" type="Panel"]
+[node name="AgentPreview" type="Panel"]
 custom_minimum_size = Vector2(120, 150)
 offset_right = 40.0
 offset_bottom = 40.0
