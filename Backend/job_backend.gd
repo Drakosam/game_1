@@ -2,7 +2,7 @@ extends Node
 
 var current_job = 'IDLE'
 var job_progress = 0
-var job_goal = 0
+var job_goal = 1
 
 var primary_atribute = ''
 var secondary_atribute = ''
@@ -61,7 +61,7 @@ func stop_job():
 	primary_atribute = ''
 	secondary_atribute = ''
 	job_progress = 0
-	job_goal = 0
+	job_goal = 1
 	job_result_list = []
 
 #Work section

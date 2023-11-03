@@ -13,6 +13,15 @@ var influance = 1
 var mental = 1
 var aether = 0
 
+var helth = 10
+var maxHelth = 10
+
+var morale = 100
+var maxMorale = 100
+
+var heat = 0
+var maxHeat = 100
+
 signal move_to_new_region()
 signal job_done_result(job_result)
 signal check_path_to_target_posytion(start_tile, target_tile, my_name)

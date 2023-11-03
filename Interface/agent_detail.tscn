@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dgd8f6n7emumg"]
+[gd_scene load_steps=6 format=3 uid="uid://dgd8f6n7emumg"]
 
 [ext_resource type="Script" path="res://Interface/agent_detail.gd" id="1_nt1d1"]
+[ext_resource type="PackedScene" uid="uid://cqrjc10dx4c50" path="res://Interface/component/agent_info_panel.tscn" id="2_knc1q"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5218r"]
 bg_color = Color(0.0846899, 0.0846899, 0.0846899, 1)
@@ -15,6 +16,10 @@ bg_color = Color(0.690196, 0.690196, 0.690196, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -29.0
+offset_top = 2.0
+offset_right = -29.0
+offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5218r")
@@ -74,6 +79,22 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_epmet")
 text = "Cancel Work"
+
+[node name="VSeparator" type="VSeparator" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 200.0
+offset_right = 205.0
+grow_vertical = 2
+
+[node name="AgentInfoPanel" parent="." instance=ExtResource("2_knc1q")]
+layout_mode = 1
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_left = 203.0
+offset_bottom = 252.0
+grow_vertical = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonMove" to="." method="_move_agent"]

@@ -11,6 +11,7 @@ func _ready():
 
 func set_show_agent(agent_item):
 	show_agent = agent_item
+	$AgentInfoPanel.set_agent(show_agent)
 
 
 func _on_button_pressed():
