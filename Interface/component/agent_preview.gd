@@ -11,7 +11,7 @@ func _ready():
 	$VBoxContainer/ProgressBar.visible = false
 
 
-func _process(delta):
+func _process(_delta):
 	if aggent_preview:
 		$VBoxContainer/AgentName.text = str(aggent_preview.name)
 		

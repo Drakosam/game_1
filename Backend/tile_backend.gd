@@ -82,9 +82,10 @@ func _region_selected(hex_name):
 
 
 func  resolve_job_result(job_result):
-	for item in job_result['results']:
-		if item['name'] == 'new_region':
-			_reveal_new_region(job_result['tile'])
+	if 'EXPLORE' == job_result['job_type']:
+		for item in job_result['results']:
+			if item['name'] == 'new_region':
+				_reveal_new_region(job_result['tile'])
 
 
 func _reveal_new_region(start_tile):
@@ -95,6 +96,7 @@ func _reveal_new_region(start_tile):
 			target_tile = item
 			break
 	var region_to_reveal = []
+	
 	for tile in tile_list:
 		if tile.region_level == target_tile.region_level:
 			var i_d = round(target_tile.get_distance_from_me(tile.position))
@@ -103,6 +105,7 @@ func _reveal_new_region(start_tile):
 	
 	if region_to_reveal.size()==1:
 		region_to_reveal[0].visible = true
+		
 	if region_to_reveal.size()>1:
 		rng.randomize()
 		var dice = rng.randi_range(0,region_to_reveal.size()-1)

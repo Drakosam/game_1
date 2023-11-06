@@ -8,6 +8,7 @@ signal update_agent_locations(agent_locations)
 signal update_agents_in_region(agents_list)
 signal chec_path_to_tile(start_tile, target_tile, agent_name)
 signal job_done_result( job_result )
+signal consume_food_event(consume_value, agent_name)
 
 
 func _ready():
@@ -22,6 +23,8 @@ func add_agent(agent_seed=null):
 	new_agent.connect('move_to_new_region',new_location_for_agent)
 	new_agent.connect('check_path_to_target_posytion',_chec_path_to_tile)
 	new_agent.connect('job_done_result',_job_done_result)
+	new_agent.connect('consume_food_event',_consume_food_event)
+	new_agent.connect('im_dead',_agent_is_dead)
 	
 	add_child(new_agent)
 	
@@ -90,4 +93,25 @@ func _job_done_result(job_result):
 		emit_signal('job_done_result',job_result)
 
 
+func resolve_consume_event_for_agent(food_dif,agent_name):
+	for child in get_children():
+		child.consume_result(food_dif, agent_name)
 
+
+func _consume_food_event(consume_value, agent_name):
+	emit_signal('consume_food_event',consume_value, agent_name)
+	
+
+func _agent_is_dead(agent_name):
+	print('agent :: ',agent_name,' is dead')
+	for child in get_children():
+		if child.name == agent_name:
+			remove_child(child)
+			new_location_for_agent()
+			child.disconnect('move_to_new_region',new_location_for_agent)
+			child.disconnect('check_path_to_target_posytion',_chec_path_to_tile)
+			child.disconnect('job_done_result',_job_done_result)
+			child.disconnect('consume_food_event',_consume_food_event)
+			child.disconnect('im_dead',_agent_is_dead)
+			child.queue_free()
+			break

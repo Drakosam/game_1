@@ -53,7 +53,7 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_epmet")
-text = "MOVE"
+text = "Move"
 
 [node name="ButtonExplore" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -65,7 +65,25 @@ text = "Explore"
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_epmet")
-text = "RECRUITING"
+text = "Recruitong"
+
+[node name="ButtonTraining" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_epmet")
+text = "Training"
+
+[node name="ButtonBaseResources" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_epmet")
+text = "Base Resources"
+
+[node name="ButtonConvertResToTood" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_epmet")
+text = "Convert Resource to Food"
 
 [node name="Example" type="Button" parent="VBoxContainer"]
 visible = false
@@ -100,4 +118,7 @@ grow_vertical = 1
 [connection signal="pressed" from="VBoxContainer/ButtonMove" to="." method="_move_agent"]
 [connection signal="pressed" from="VBoxContainer/ButtonExplore" to="." method="_on_button_explore_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonRecruting" to="." method="_on_button_recruting_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonTraining" to="." method="_on_button_training_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonBaseResources" to="." method="_on_button_base_resources_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonConvertResToTood" to="." method="_on_button_convert_res_to_tood_pressed"]
 [connection signal="pressed" from="VBoxContainer/CancelWork" to="." method="_on_cancel_work_pressed"]

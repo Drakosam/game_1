@@ -22,8 +22,21 @@ func job_done():
 	
 	if current_job == 'EXPLORE':
 		_resolve_explore_job()
+		
 	elif current_job == 'RECRUITING':
-		_resolve_recruiting_job()
+		_generic_resolve_job(79)
+		
+	elif current_job == 'TRAINING':
+		var parent = get_parent()
+		var mod = parent.speed + parent.power + parent.influance + parent.mental
+		mod = (mod + parent.aether - 4) * 2 + 60 
+		_generic_resolve_job(mod)
+	
+	elif current_job == 'BASE_RESOURCES':
+		_generic_resolve_job(10)
+		
+	elif  current_job == 'RESOURCES_TO_FOOD':
+		_generic_resolve_job(5)
 	
 	emit_signal('job_done_result',{'name':current_job,'result':job_result_list})
 	stop_job()
@@ -32,16 +45,30 @@ func job_done():
 func start_job(job_name):
 	if job_name == 'MOVE':
 		_start_movment() 
+	
 	elif job_name == 'EXPLORE':
 		_start_explore() 
+	
 	elif job_name == 'RECRUITING':
 		_start_recruiting() 
+	
+	elif job_name == 'TRAINING':
+		_general_training() 
+	
+	elif job_name == 'BASE_RESOURCES':
+		_base_resources() 
+	
+	elif job_name == 'RESOURCES_TO_FOOD':
+		_resources_to_food() 
 
 
 func act(stats = null):
 	if current_job != 'IDLE':
 		if not stats:
 			stats = {}
+			
+		if primary_atribute == '':
+			job_progress += 1
 		
 		if primary_atribute in stats:
 			job_progress += stats[primary_atribute]
@@ -54,6 +81,7 @@ func act(stats = null):
 
 		if job_progress>job_goal:
 			job_done()
+
 
 func stop_job():
 	print('IDLE')
@@ -82,14 +110,50 @@ func _start_explore():
 	current_job = "EXPLORE"
 
 
+func _resources_to_food():
+	print('start convert resource to food')
+	primary_atribute = 'mental'
+	secondary_atribute = 'speed'
+	job_goal = 100
+	current_job = "RESOURCES_TO_FOOD"
+
+
 func _start_recruiting():
 	print('start recruiting')
 	primary_atribute = 'influance'
 	secondary_atribute = 'mental'
 	job_goal = 450
 	current_job = "RECRUITING"
+
+
+func _general_training():
+	print('start general training')
+	primary_atribute = ''
+	secondary_atribute = ''
+	job_goal = 450
+	current_job = "TRAINING"
+	
+	
+func _base_resources():
+	print('start base resources')
+	primary_atribute = 'power'
+	secondary_atribute = 'speed'
+	job_goal = 500
+	current_job = "BASE_RESOURCES"
+	
 	
 # Work resolve
+func _generic_resolve_job(succes_rate=50):
+	rng.randomize()
+	var result = rng.randi_range(0, 100)
+	
+	if result > succes_rate:
+		job_result_list.append({'status':'SUCCESS'})
+	else:
+		job_result_list.append({'status':'FAIL'})
+	print(job_result_list, ' ', result, ' ' , succes_rate)
+
+
 func _resolve_explore_job():
 	rng.randomize()
 	var result = rng.randi_range(0, 100)
@@ -100,13 +164,7 @@ func _resolve_explore_job():
 		print(result)
 
 
-func _resolve_recruiting_job():
-	rng.randomize()
-	var result = rng.randi_range(0, 100)
-	
-	if result >79:
-		job_result_list.append({'status':'SUCCESS'})
-	else:
-		job_result_list.append({'status':'FAIL'})
-	print(job_result_list)
+
+
+
 

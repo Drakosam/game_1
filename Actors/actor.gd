@@ -21,17 +21,22 @@ var maxMorale = 100
 
 var heat = 0
 var maxHeat = 100
+var live = true
 
 signal move_to_new_region()
 signal job_done_result(job_result)
 signal check_path_to_target_posytion(start_tile, target_tile, my_name)
+signal im_dead(my_name)
 
 var job_backend = null
+
+var rng = RandomNumberGenerator.new()
 
 func _ready():
 	var JobBackend = preload("res://Backend/job_backend.tscn")
 	job_backend = JobBackend.instantiate()
 	job_backend.connect('job_done_result',_on_job_done_result)
+	add_child(job_backend) 
 
 
 func move_to_region(new_region_name):
@@ -46,6 +51,13 @@ func set_target_region_path(recypient_name, in_target_path):
 
 
 func act():
+	if not live:
+		return
+	
+	if helth < 1:
+		emit_signal("im_dead",name)
+		return
+		
 	if job_backend :		
 		job_backend.act({
 			'speed':speed,
@@ -66,6 +78,7 @@ func get_job_core():
 func add_job_to_do(job_name):
 	jobs_to_do_list.append(job_name)
 
+
 func set_job_to_do(job_name):
 	jobs_to_do_list.clear()
 	job_backend.stop_job()
@@ -79,8 +92,17 @@ func explore_tile():
 func go_idle():
 	set_job_to_do('IDLE')
 	
+	
 func recruit():
 	set_job_to_do('RECRUITING')
+
+
+func training():
+	set_job_to_do('TRAINING')
+	
+	
+func get_resources():
+	set_job_to_do('BASE_RESOURCES')
 
 
 func _on_job_done_result(job_result):
@@ -88,8 +110,15 @@ func _on_job_done_result(job_result):
 		_move()
 		return
 	
+	elif job_result['name'] == 'TRAINING':
+		_up_stat()
+		return
+	
 	elif job_result['name'] == 'EXPLORE':
 		jobs_to_do_list.push_front('EXPLORE')
+		
+	elif job_result['name'] == 'BASE_RESOURCES':
+		jobs_to_do_list.push_front('BASE_RESOURCES')
 		
 	elif job_result['name'] == 'RECRUITING':
 		jobs_to_do_list.push_front('RECRUITING')
@@ -98,6 +127,7 @@ func _on_job_done_result(job_result):
 		'name':name, 
 		'tile':tile_posytion , 
 		'job_type': job_result['name'],
+		'agent_power':power,
 		'results':job_result['result']})
 
 
@@ -107,3 +137,21 @@ func _move():
 	
 	if path_to_posytion.size()>0:
 		jobs_to_do_list.push_front('MOVE')
+
+
+func _up_stat():
+	rng.randomize()
+	var result = rng.randi_range(0,4)
+	
+	if result == 0:
+		speed += 1
+	elif result == 1:
+		power += 1
+	elif result == 2:
+		influance += 1 
+	elif result == 3:
+		mental += 1
+	elif result == 4:
+		aether += 1
+	
+	jobs_to_do_list.push_front('TRAINING')

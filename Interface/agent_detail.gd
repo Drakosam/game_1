@@ -37,3 +37,15 @@ func _on_cancel_work_pressed():
 
 func _on_button_recruting_pressed():
 	show_agent.recruit()
+
+
+func _on_button_training_pressed():
+	show_agent.training()
+
+
+func _on_button_base_resources_pressed():
+	show_agent.get_resources()
+
+
+func _on_button_convert_res_to_tood_pressed():
+	show_agent.convert_resorces_to_food()

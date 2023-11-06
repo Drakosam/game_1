@@ -16,7 +16,11 @@ func set_agent(new_agent):
 
 func _process(_delta):
 	$HelthLabel.text = str($HelthBar.value)+' / '+str($HelthBar.max_value)
-	if curent_agent:
+	
+	if not self.visible:
+		return
+		
+	if curent_agent != null:
 		$HBoxContainer/SpeedLabel.text ='Speed: ' + str(curent_agent.speed)
 		$HBoxContainer/PowerLabel.text = 'Power: ' + str(curent_agent.power)
 		$HBoxContainer/InfluanceLabel.text ='Influance: ' + str(curent_agent.influance)

@@ -19,6 +19,8 @@ func _ready():
 		'name':'Agent_004'
 	})
 	
+	$CanvasLayer/TopPanel.set_backend($GameCore)
+	
 
 func _on_world_map_register_tile(tile):
 	$TileBackend.register_tile(tile)
@@ -76,4 +78,11 @@ func _on_agent_backend_chec_path_to_tile(start_tile, target_tile, agent_name):
 
 
 func _on_agent_backend_job_done_result(job_result):
+	print('main job resolve for :: ', job_result)
 	$TileBackend.resolve_job_result(job_result)
+	$GameCore.resolve_job_result(job_result)
+
+
+func _on_agent_backend_consume_food_event(consume_value, agent_name):
+	var consume_dif = $GameCore.consume_food(consume_value)
+	$AgentBackend.resolve_consume_event_for_agent(consume_dif, agent_name)
