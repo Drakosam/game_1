@@ -9,23 +9,10 @@ func _ready():
 
 
 func resolve_job_result(job_result):
-	if 'BASE_RESOURCES' == job_result['job_type']:
-		for item in job_result['results']:
-			if item['status'] == 'SUCCESS':
-				_get_base_resource_from_region(
-					job_result['tile'], 
-					job_result['agent_power']
-				)
-	
 	if 'RESOURCES_TO_FOOD' == job_result['job_type']:
 		for item in job_result['results']:
 			if item['status'] == 'SUCCESS':
 				_convert_resources_to_food(job_result['agent_power'])
-
-
-func _get_base_resource_from_region(_region_name, agent_power):
-	rng.randomize()
-	resource +=  randi_range(3,6) + agent_power
 
 
 func consume_food(_food):

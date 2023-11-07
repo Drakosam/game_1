@@ -11,6 +11,7 @@ var world_posytion_center = 0
 
 var my_neighborhood = []
 var region_level = ''
+var resources = 0
 
 var rng = RandomNumberGenerator.new()
 
@@ -18,7 +19,7 @@ signal picked_hex(hex_name, pick_position)
 signal picket_move(hex_name)
 
 func _ready():
-	pass
+	resources = rng.randi_range(100,200)
 	
 	
 func _on_area_2d_mouse_entered():

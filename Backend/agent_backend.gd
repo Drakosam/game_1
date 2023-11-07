@@ -9,6 +9,7 @@ signal update_agents_in_region(agents_list)
 signal chec_path_to_tile(start_tile, target_tile, agent_name)
 signal job_done_result( job_result )
 signal consume_food_event(consume_value, agent_name)
+signal secure_food_for_new_agent(food_needed, location)
 
 
 func _ready():
@@ -75,7 +76,7 @@ func set_tile_path(agent_name, path):
 	print('set tile path recive data :: agent name -> ',agent_name, ' path -> ',path)
 	for child in get_children():
 		child.set_target_region_path(agent_name, path)
-	
+
 
 func act():
 	for child in get_children():
@@ -88,7 +89,7 @@ func _job_done_result(job_result):
 		for result in job_result['results']:
 			if 'status' in result and result['status']=='SUCCESS':
 				print('add new agent')
-				add_agent({'location':job_result['tile']})
+				emit_signal('secure_food_for_new_agent', 15, job_result['tile'])
 	else:
 		emit_signal('job_done_result',job_result)
 
@@ -100,7 +101,7 @@ func resolve_consume_event_for_agent(food_dif,agent_name):
 
 func _consume_food_event(consume_value, agent_name):
 	emit_signal('consume_food_event',consume_value, agent_name)
-	
+
 
 func _agent_is_dead(agent_name):
 	print('agent :: ',agent_name,' is dead')

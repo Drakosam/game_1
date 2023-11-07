@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b8ewnoxo6fl2b"]
+[gd_scene load_steps=11 format=3 uid="uid://b8ewnoxo6fl2b"]
 
 [ext_resource type="Script" path="res://main_game_loop.gd" id="1_2jap4"]
 [ext_resource type="PackedScene" uid="uid://f1a2s13oeo64" path="res://Interface/top_panel.tscn" id="1_qrgga"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b5nsgnnmye12k" path="res://Backend/tile_backend.tscn" id="5_m6o2q"]
 [ext_resource type="PackedScene" uid="uid://bkvqc87m2xabn" path="res://Backend/agent_backend.tscn" id="6_hhaky"]
 [ext_resource type="PackedScene" uid="uid://bs5gxwsh0kkjn" path="res://Backend/game_core.tscn" id="9_sc2wi"]
+[ext_resource type="PackedScene" uid="uid://blnup5xcrumek" path="res://Backend/manager_backend.tscn" id="10_7fjto"]
 
 [node name="MainGameLoop" type="Node2D"]
 script = ExtResource("1_2jap4")
@@ -41,6 +42,8 @@ autostart = true
 
 [node name="GameCore" parent="." instance=ExtResource("9_sc2wi")]
 
+[node name="ManagerBackend" parent="." instance=ExtResource("10_7fjto")]
+
 [connection signal="view_is_blocked" from="CanvasLayer/TopPanel" to="." method="_on_view_is_blocked"]
 [connection signal="show_agent" from="CanvasLayer/AgentPanel" to="." method="_on_agent_panel_show_agent"]
 [connection signal="view_is_blocked" from="CanvasLayer/AgentPanel" to="." method="_on_view_is_blocked"]
@@ -52,6 +55,7 @@ autostart = true
 [connection signal="chec_path_to_tile" from="AgentBackend" to="." method="_on_agent_backend_chec_path_to_tile"]
 [connection signal="consume_food_event" from="AgentBackend" to="." method="_on_agent_backend_consume_food_event"]
 [connection signal="job_done_result" from="AgentBackend" to="." method="_on_agent_backend_job_done_result"]
+[connection signal="secure_food_for_new_agent" from="AgentBackend" to="." method="_on_agent_backend_secure_food_for_new_agent"]
 [connection signal="update_agent_locations" from="AgentBackend" to="." method="_on_agent_backend_update_agent_locations"]
 [connection signal="update_agents_in_region" from="AgentBackend" to="." method="_on_agent_backend_update_agents_in_region"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
