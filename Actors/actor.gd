@@ -41,7 +41,7 @@ func _ready():
 
 func move_to_region(new_region_name):
 	emit_signal('check_path_to_target_posytion', tile_posytion, new_region_name, name)
-	set_job_to_do('MOVE')
+	set_job_to_do(JobNames.move)
 
 
 func set_target_region_path(recypient_name, in_target_path):
@@ -67,7 +67,7 @@ func act():
 			'aether':aether
 		})
 		
-		if jobs_to_do_list.size() > 0 and job_backend.current_job == 'IDLE':
+		if jobs_to_do_list.size() > 0 and job_backend.current_job == JobNames.idle:
 			job_backend.start_job(jobs_to_do_list.pop_front())
 
 
@@ -83,45 +83,15 @@ func set_job_to_do(job_name):
 	jobs_to_do_list.clear()
 	job_backend.stop_job()
 	jobs_to_do_list.append(job_name)
-	
-
-func explore_tile():
-	set_job_to_do('EXPLORE')
-
-
-func go_idle():
-	set_job_to_do('IDLE')
-	
-	
-func recruit():
-	set_job_to_do('RECRUITING')
-
-
-func training():
-	set_job_to_do('TRAINING')
-	
-	
-func get_resources():
-	set_job_to_do('BASE_RESOURCES')
 
 
 func _on_job_done_result(job_result):
-	if job_result['name'] == 'MOVE':
+	if job_result['name'] == JobNames.move:
 		_move()
 		return
 	
-	elif job_result['name'] == 'TRAINING':
-		_up_stat()
-		return
-	
-	elif job_result['name'] == 'EXPLORE':
-		jobs_to_do_list.push_front('EXPLORE')
-		
-	elif job_result['name'] == 'BASE_RESOURCES':
-		jobs_to_do_list.push_front('BASE_RESOURCES')
-		
-	elif job_result['name'] == 'RECRUITING':
-		jobs_to_do_list.push_front('RECRUITING')
+	if job_result['repeat']:
+		jobs_to_do_list.push_front(job_result['name'])
 	
 	emit_signal('job_done_result',{
 		'name':name, 
@@ -136,10 +106,10 @@ func _move():
 	emit_signal('move_to_new_region')
 	
 	if path_to_posytion.size()>0:
-		jobs_to_do_list.push_front('MOVE')
+		jobs_to_do_list.push_front(JobNames.move)
 
 
-func _up_stat():
+func up_stat():
 	rng.randomize()
 	var result = rng.randi_range(0,4)
 	
@@ -154,4 +124,3 @@ func _up_stat():
 	elif result == 4:
 		aether += 1
 	
-	jobs_to_do_list.push_front('TRAINING')

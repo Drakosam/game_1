@@ -94,7 +94,7 @@ func _reveal_new_resources(region_name):
 	for tile in tile_list:
 		if tile.name == region_name:
 			rng.randomize()
-			tile.resource == rng.randi_range(30, 60)
+			tile.resources += rng.randi_range(30, 60)
 			break
 
 
@@ -102,17 +102,15 @@ func get_resource_from_region(region_name, value):
 	for tile in tile_list:
 		if tile.name == region_name:
 
-			if value >= tile.resource:
-				tile.resource -= value
+			if value <= tile.resources:
+				tile.resources -= value
 				return 0
-
 			else:
-
-				var r_value = value - tile.resource
-				tile.resource = 0
+				var r_value = value - tile.resources
+				tile.resources = 0
 				return r_value
 
-			break
+	return value
 
 
 func _reveal_new_region(start_tile):

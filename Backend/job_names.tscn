@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbqtm6uuvmp6s"]
+
+[ext_resource type="Script" path="res://Backend/job_names.gd" id="1_reic1"]
+
+[node name="JobNames" type="Node"]
+script = ExtResource("1_reic1")

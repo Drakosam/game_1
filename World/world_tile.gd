@@ -19,7 +19,10 @@ signal picked_hex(hex_name, pick_position)
 signal picket_move(hex_name)
 
 func _ready():
-	resources = rng.randi_range(100,200)
+	resources = rng.randi_range(
+		CoreValue.min_start_resources_in_tile,
+		CoreValue.max_start_resources_in_tile
+	)
 	
 	
 func _on_area_2d_mouse_entered():

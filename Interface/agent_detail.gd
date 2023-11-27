@@ -28,24 +28,24 @@ func move_agent_to_region(region_name):
 
 
 func _on_button_explore_pressed():
-	show_agent.explore_tile()
+	show_agent.set_job_to_do(JobNames.explore)
 
 
 func _on_cancel_work_pressed():
-	show_agent.go_idle()
+	show_agent.set_job_to_do(JobNames.idle)
 
 
 func _on_button_recruting_pressed():
-	show_agent.recruit()
+	show_agent.set_job_to_do(JobNames.recruiting)
 
 
 func _on_button_training_pressed():
-	show_agent.training()
+	show_agent.set_job_to_do(JobNames.trening)
 
 
 func _on_button_base_resources_pressed():
-	show_agent.get_resources()
+	show_agent.set_job_to_do(JobNames.base_resource)
 
 
 func _on_button_convert_res_to_tood_pressed():
-	show_agent.convert_resorces_to_food()
+	show_agent.set_job_to_do(JobNames.resources_to_food)

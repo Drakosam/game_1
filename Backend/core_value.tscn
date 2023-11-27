@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0ijnh0xspyex"]
+
+[ext_resource type="Script" path="res://Backend/core_value.gd" id="1_wqfwg"]
+
+[node name="CoreValue" type="Node"]
+script = ExtResource("1_wqfwg")

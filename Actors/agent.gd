@@ -48,15 +48,3 @@ func act():
 
 	_consume()
 	super()
-	
-
-func convert_resorces_to_food():
-	set_job_to_do('RESOURCES_TO_FOOD')
-	
-	
-func _on_job_done_result(job_result):
-	
-	if job_result['name'] == 'RESOURCES_TO_FOOD':
-		jobs_to_do_list.push_front('RESOURCES_TO_FOOD')
-	
-	super(job_result)

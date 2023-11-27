@@ -15,6 +15,12 @@ run/main_scene="res://main_game_loop.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameCore="*res://Backend/game_core.gd"
+CoreValue="*res://Backend/core_value.gd"
+JobNames="*res://Backend/job_names.gd"
+
 [display]
 
 window/size/viewport_width=1200

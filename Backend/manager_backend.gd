@@ -2,7 +2,6 @@ extends Node
 
 var TileBackend = null
 var AgentManager = null
-var CoreManager = null
 
 var rng = RandomNumberGenerator.new()
 
@@ -22,5 +21,7 @@ func resolve_job_result(job_result):
 
 func _get_base_resource_from_region(_region_name, agent_power):
 	rng.randomize()
-	TileBackend.get_resource_from_region()
-	CoreManager.resource +=  randi_range(3,6) + agent_power
+	var get_value = randi_range(3,6) + agent_power
+	var dif_value = TileBackend.get_resource_from_region(_region_name, get_value)
+	print(get_value,' ',dif_value)
+	GameCore.resource +=  (get_value - dif_value)

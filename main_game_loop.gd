@@ -7,11 +7,8 @@ func _ready():
 	$AgentBackend.add_agent({'location':'BaseLevel_LC0_5'})
 	$AgentBackend.add_agent({'location':'BaseLevel_LC0_5'})
 	
-	$CanvasLayer/TopPanel.set_backend($GameCore)
-	
 	$ManagerBackend.TileBackend = $TileBackend
 	$ManagerBackend.AgentManager = $AgentBackend
-	$ManagerBackend.CoreManager =  $GameCore
 	
 
 func _on_world_map_register_tile(tile):
@@ -72,16 +69,16 @@ func _on_agent_backend_chec_path_to_tile(start_tile, target_tile, agent_name):
 func _on_agent_backend_job_done_result(job_result):
 	print('main job resolve for :: ', job_result)
 	$TileBackend.resolve_job_result(job_result)
-	$GameCore.resolve_job_result(job_result)
+	GameCore.resolve_job_result(job_result)
 	$ManagerBackend.resolve_job_result(job_result)
 
 
 func _on_agent_backend_consume_food_event(consume_value, agent_name):
-	var consume_dif = $GameCore.consume_food(consume_value)
+	var consume_dif = GameCore.consume_food(consume_value)
 	$AgentBackend.resolve_consume_event_for_agent(consume_dif, agent_name)
 
 
 func _on_agent_backend_secure_food_for_new_agent(food_needed, location ):
-	if $GameCore.food >= food_needed:
-		$GameCore.food -= food_needed
+	if GameCore.food >= food_needed:
+		GameCore.food -= food_needed
 		$AgentBackend.add_agent({'location':location})

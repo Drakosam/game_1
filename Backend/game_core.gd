@@ -1,11 +1,11 @@
 extends Node
 
 var resource = 0
-var food = 200
+var food = 0
 var rng = RandomNumberGenerator.new()
 
 func _ready():
-	pass 
+	food = CoreValue.start_food_value
 
 
 func resolve_job_result(job_result):
@@ -25,10 +25,14 @@ func consume_food(_food):
 
 
 func _convert_resources_to_food(agent_power):
-	if resource >= 10 + agent_power:
-		resource -= (10 + agent_power)
-		food += (10 + agent_power) * 3
+	
+	var rtfm = CoreValue.resources_to_food_multi
+	var rtfbv = CoreValue.resources_to_food_base_value
+	
+	if resource >= rtfbv + agent_power:
+		resource -= (rtfbv + agent_power)
+		food += (rtfbv + agent_power) * rtfm
 	else:
-		food += resource * 3
+		food += resource * rtfm
 		resource -= resource
 	
