@@ -2,8 +2,6 @@ extends "res://Actors/actor.gd"
 
 var consume_level = 500
 
-signal consume_food_event(consume_value,agent_name)
-
 func _ready():
 	super()
 	role = 'agent'
@@ -20,14 +18,25 @@ func _ready():
 func _consume():
 	consume_level -= 1
 	if consume_level < 0 :
-		var consume_value = 4 + int(round(float(speed + power + influance + mental + aether ) / 2))
-		emit_signal('consume_food_event',consume_value,name)
+		var consume_food_value = CoreValue.food_base_conumption
+		var consuption_from_attr = speed + power + influance + mental + aether 
+		consuption_from_attr = float(consuption_from_attr) / 2
+		consuption_from_attr *= CoreValue.food_conumption_attr_multi
+		consume_food_value += roundi(consuption_from_attr)
+		
+		var consume_food_dif = 0
+		
+		if consume_food_value <= GameCore.food:
+			GameCore.food -= consume_food_value
+		else:
+			consume_food_dif = consume_food_value - GameCore.food
+			GameCore.food = 0
+		
+		consume_result(consume_food_dif)
 		consume_level = 500
 
 
-func consume_result(consume_value, agent_name):
-	if agent_name != name:
-		return 
+func consume_result(consume_value):
 	
 	print('me ::', name,' consume -> ',consume_value)
 	if consume_value > 0:

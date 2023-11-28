@@ -115,12 +115,16 @@ func up_stat():
 	
 	if result == 0:
 		speed += 1
+	
 	elif result == 1:
 		power += 1
+	
 	elif result == 2:
 		influance += 1 
+	
 	elif result == 3:
 		mental += 1
+		
 	elif result == 4:
 		aether += 1
 	

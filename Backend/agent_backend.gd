@@ -8,8 +8,6 @@ signal update_agent_locations(agent_locations)
 signal update_agents_in_region(agents_list)
 signal chec_path_to_tile(start_tile, target_tile, agent_name)
 signal job_done_result( job_result )
-signal consume_food_event(consume_value, agent_name)
-signal secure_food_for_new_agent(food_needed, location)
 
 
 func _ready():
@@ -24,7 +22,6 @@ func add_agent(agent_seed=null):
 	new_agent.connect('move_to_new_region',new_location_for_agent)
 	new_agent.connect('check_path_to_target_posytion',_chec_path_to_tile)
 	new_agent.connect('job_done_result',_job_done_result)
-	new_agent.connect('consume_food_event',_consume_food_event)
 	new_agent.connect('im_dead',_agent_is_dead)
 	
 	add_child(new_agent)
@@ -85,11 +82,13 @@ func act():
 
 func _job_done_result(job_result):
 	print(job_result)
-	if job_result['job_type'] == 'RECRUITING':
+	if job_result['job_type'] == JobNames.recruiting:
 		for result in job_result['results']:
 			if 'status' in result and result['status']=='SUCCESS':
 				print('add new agent')
-				emit_signal('secure_food_for_new_agent', 15, job_result['tile'])
+				if GameCore.food >= JobNames.food_for_new_agent:
+					GameCore.food -= JobNames.food_for_new_agent
+					add_agent({'location':job_result['tile']})
 	else:
 		emit_signal('job_done_result',job_result)
 
@@ -98,9 +97,6 @@ func resolve_consume_event_for_agent(food_dif,agent_name):
 	for child in get_children():
 		child.consume_result(food_dif, agent_name)
 
-
-func _consume_food_event(consume_value, agent_name):
-	emit_signal('consume_food_event',consume_value, agent_name)
 
 
 func _agent_is_dead(agent_name):
@@ -112,7 +108,6 @@ func _agent_is_dead(agent_name):
 			child.disconnect('move_to_new_region',new_location_for_agent)
 			child.disconnect('check_path_to_target_posytion',_chec_path_to_tile)
 			child.disconnect('job_done_result',_job_done_result)
-			child.disconnect('consume_food_event',_consume_food_event)
 			child.disconnect('im_dead',_agent_is_dead)
 			child.queue_free()
 			break
