@@ -34,12 +34,16 @@ func _on_agent_backend_update_agents_in_region(agents_list):
 func _on_agent_panel_show_agent(agent_item):
 	$CanvasLayer/AgentDetail.set_show_agent(agent_item)
 	$CanvasLayer/AgentDetail.visible = true
+	
+	$CanvasLayer/TileInfo.visible = false
 	$CanvasLayer/AgentPanel.visible = false
 	$WorldMap.view_is_bloced(true)
 
 
 func _on_agent_detail_close_agent_detail():
 	$CanvasLayer/AgentDetail.visible = false
+	
+	$CanvasLayer/TileInfo.visible = true
 	$CanvasLayer/AgentPanel.visible = true
 	$WorldMap.view_is_bloced(false)
 
@@ -48,11 +52,13 @@ func _on_agent_detail_move_pick_proc():
 	$TileBackend.start_move_proces()
 	$CanvasLayer/AgentDetail.visible = false
 	$CanvasLayer/AgentPanel.visible = false
+	$CanvasLayer/TileInfo.visible = false
 
 
 func _on_tile_backend_selected_region_whos_picked(hex_name):
 	$CanvasLayer/AgentDetail.visible = true
 	$CanvasLayer/AgentPanel.visible = false
+	$CanvasLayer/TileInfo.visible = false
 	$CanvasLayer/AgentDetail.move_agent_to_region(hex_name)
 
 
@@ -71,4 +77,3 @@ func _on_agent_backend_job_done_result(job_result):
 	$TileBackend.resolve_job_result(job_result)
 	GameCore.resolve_job_result(job_result)
 	$ManagerBackend.resolve_job_result(job_result)
-

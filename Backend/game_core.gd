@@ -3,6 +3,7 @@ extends Node
 var resource = 0
 var food = 0
 var rng = RandomNumberGenerator.new()
+var curent_tile = null
 
 func _ready():
 	food = CoreValue.start_food_value

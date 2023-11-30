@@ -59,13 +59,7 @@ func act():
 		return
 		
 	if job_backend :		
-		job_backend.act({
-			'speed':speed,
-			'power':power,
-			'influance':influance,
-			'mental':mental,
-			'aether':aether
-		})
+		job_backend.act()
 		
 		if jobs_to_do_list.size() > 0 and job_backend.current_job == JobNames.idle:
 			job_backend.start_job(jobs_to_do_list.pop_front())

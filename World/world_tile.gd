@@ -37,6 +37,7 @@ func _input(event):
 	if focus and not view_is_blocked:
 		if (event is InputEventMouseButton) and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) :
 			emit_signal("picked_hex", name, position)
+			GameCore.curent_tile = self
 	elif focus and move_process:
 		if (event is InputEventMouseButton) and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) :
 			emit_signal("picket_move", '')
