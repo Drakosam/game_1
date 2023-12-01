@@ -114,6 +114,10 @@ offset_left = 203.0
 offset_bottom = 252.0
 grow_vertical = 1
 
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonMove" to="." method="_move_agent"]
 [connection signal="pressed" from="VBoxContainer/ButtonExplore" to="." method="_on_button_explore_pressed"]
@@ -122,3 +126,4 @@ grow_vertical = 1
 [connection signal="pressed" from="VBoxContainer/ButtonBaseResources" to="." method="_on_button_base_resources_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonConvertResToTood" to="." method="_on_button_convert_res_to_tood_pressed"]
 [connection signal="pressed" from="VBoxContainer/CancelWork" to="." method="_on_cancel_work_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
